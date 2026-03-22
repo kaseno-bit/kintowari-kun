@@ -3,26 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>均等割りくん</title>
-
+  <title>均等割りくん Ver2</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="manifest" href="manifest.json">
 </head>
-
 <body>
-
   <div class="container">
-    <h1>均等割りくん</h1>
+    <h1>均等割りくん Ver2</h1>
 
     <div class="card">
-      <label>壁幅</label>
-      <input id="wallWidth" type="number" placeholder="例：5000">
+      <label>計算モード</label>
+      <select id="calcMode">
+        <option value="even">すべて均等</option>
+        <option value="fixEdge">両端を指定 → 中を自動</option>
+        <option value="fixGap">中の隙間を指定 → 両端を自動</option>
+      </select>
+    </div>
+
+    <div class="card">
+      <label>壁幅 (mm)</label>
+      <input id="wallWidth" type="number" placeholder="例：5000" inputmode="decimal">
+    </div>
+
+    <div id="extraSettings" class="card" style="display:none;">
+      <div id="edgeInputGroup" style="display:none;">
+        <label>両端の余白 (mm)</label>
+        <input id="edgeWidth" type="number" placeholder="例：500" inputmode="decimal">
+      </div>
+      <div id="gapInputGroup" style="display:none;">
+        <label>作品同士の隙間 (mm)</label>
+        <input id="midGapWidth" type="number" placeholder="例：200" inputmode="decimal">
+      </div>
     </div>
 
     <div class="card">
       <div class="header">
-        <label>作品幅</label>
-        <button onclick="addArtwork()">＋追加</button>
+        <label>作品幅 (mm)</label>
+        <button type="button" onclick="addArtwork()">＋追加</button>
       </div>
       <div id="artworks"></div>
     </div>
@@ -33,9 +49,7 @@
     </div>
 
     <canvas id="canvas" width="350" height="120"></canvas>
-
   </div>
-
   <script src="app.js"></script>
 </body>
 </html>

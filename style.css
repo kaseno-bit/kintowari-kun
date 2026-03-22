@@ -55,3 +55,19 @@ canvas {
   border: 1px solid #ccc;
   border-radius: 8px;
 }
+
+
+select {
+  width: 100%;
+  font-size: 18px;
+  padding: 8px;
+  margin-top: 6px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: white;
+}
+
+#extraSettings {
+  background-color: #f0f7ff;
+  border: 1px solid #cfe2f3;
+}

@@ -1,100 +1,119 @@
-const artworksDiv = document.getElementById("artworks");
+document.addEventListener("DOMContentLoaded", () => {
+  const artworksDiv = document.getElementById("artworks");
+  const calcMode = document.getElementById("calcMode");
+  const extraSettings = document.getElementById("extraSettings");
+  const edgeInputGroup = document.getElementById("edgeInputGroup");
+  const gapInputGroup = document.getElementById("gapInputGroup");
 
-function addArtwork(value = "") {
-  const wrapper = document.createElement("div");
-  wrapper.style.display = "flex";
-  wrapper.style.gap = "6px";
+  // 作品追加ボタンをグローバルに公開
+  window.addArtwork = function(value = "") {
+    const wrapper = document.createElement("div");
+    wrapper.style.display = "flex";
+    wrapper.style.gap = "6px";
+    wrapper.style.marginBottom = "6px";
 
-  const input = document.createElement("input");
-  input.type = "number";
-  input.placeholder = "作品幅";
-  input.value = value;
-  input.oninput = calculate;
+    const input = document.createElement("input");
+    input.type = "number";
+    input.placeholder = "作品幅";
+    input.value = value;
+    input.inputMode = "decimal";
+    input.oninput = calculate;
 
-  const del = document.createElement("button");
-  del.innerText = "×";
-  del.onclick = () => {
-    wrapper.remove();
-    calculate();
+    const del = document.createElement("button");
+    del.innerText = "×";
+    del.type = "button";
+    del.onclick = () => {
+      wrapper.remove();
+      calculate();
+    };
+
+    wrapper.appendChild(input);
+    wrapper.appendChild(del);
+    artworksDiv.appendChild(wrapper);
   };
 
-  wrapper.appendChild(input);
-  wrapper.appendChild(del);
-  artworksDiv.appendChild(wrapper);
-}
-
-// 初期
-addArtwork();
-addArtwork();
-
-document.getElementById("wallWidth").addEventListener("input", calculate);
-
-function calculate() {
-  const wall = parseFloat(document.getElementById("wallWidth").value);
-
-  const inputs = artworksDiv.querySelectorAll("input");
-  const artworks = [];
-
-  inputs.forEach(i => {
-    const val = parseFloat(i.value);
-    if (!isNaN(val)) artworks.push(val);
-  });
-
-  const errorDiv = document.getElementById("error");
-  const gapDiv = document.getElementById("gap");
-
-  errorDiv.innerText = "";
-  gapDiv.innerText = "";
-
-  if (!wall || artworks.length === 0) return;
-
-  const total = artworks.reduce((a, b) => a + b, 0);
-
-  if (total > wall) {
-    errorDiv.innerText = "作品幅が壁を超えています";
-    return;
+  function updateUI() {
+    const mode = calcMode.value;
+    extraSettings.style.display = mode === "even" ? "none" : "block";
+    edgeInputGroup.style.display = mode === "fixEdge" ? "block" : "none";
+    gapInputGroup.style.display = mode === "fixGap" ? "block" : "none";
+    calculate();
   }
 
-  const gap = (wall - total) / (artworks.length + 1);
+  function calculate() {
+    const wall = parseFloat(document.getElementById("wallWidth").value);
+    const mode = calcMode.value;
+    const edgeVal = parseFloat(document.getElementById("edgeWidth").value) || 0;
+    const midGapVal = parseFloat(document.getElementById("midGapWidth").value) || 0;
 
-  gapDiv.innerText = `余白：${gap.toFixed(1)} mm`;
+    const inputs = artworksDiv.querySelectorAll("input");
+    const artworks = Array.from(inputs).map(i => parseFloat(i.value)).filter(v => !isNaN(v));
 
-  draw(wall, artworks, gap);
-}
+    const errorDiv = document.getElementById("error");
+    const gapDiv = document.getElementById("gap");
+    errorDiv.innerText = "";
+    gapDiv.innerText = "";
 
-function draw(wall, artworks, gap) {
-  const canvas = document.getElementById("canvas");
-  const ctx = canvas.getContext("2d");
+    if (!wall || artworks.length === 0) return;
 
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const totalArtWidth = artworks.reduce((a, b) => a + b, 0);
+    let gapStart, gapMid;
 
-  const scale = canvas.width / wall;
+    if (mode === "even") {
+      gapStart = gapMid = (wall - totalArtWidth) / (artworks.length + 1);
+    } else if (mode === "fixEdge") {
+      const gapCount = artworks.length - 1;
+      gapStart = edgeVal;
+      gapMid = gapCount > 0 ? (wall - totalArtWidth - (edgeVal * 2)) / gapCount : 0;
+    } else if (mode === "fixGap") {
+      const gapCount = artworks.length - 1;
+      gapMid = midGapVal;
+      gapStart = (wall - totalArtWidth - (midGapVal * gapCount)) / 2;
+    }
 
-  let x = gap * scale;
+    if (gapStart < 0 || gapMid < 0) {
+      errorDiv.innerText = "設定値が壁の幅を超えています";
+      return;
+    }
 
-  artworks.forEach((w, i) => {
-    const width = w * scale;
+    gapDiv.innerHTML = mode === "even" 
+      ? `余白：${gapStart.toFixed(1)} mm` 
+      : `端：${gapStart.toFixed(1)} mm / 中：${gapMid.toFixed(1)} mm`;
 
-    // 作品
-    ctx.fillStyle = "#333";
-    ctx.fillRect(x, 50, width, 30);
+    draw(wall, artworks, gapStart, gapMid);
+  }
 
-    // 作品ラベル
-    ctx.fillStyle = "white";
-    ctx.fillText(String.fromCharCode(65 + i), x + 4, 70);
+  function draw(wall, artworks, gapStart, gapMid) {
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const scale = canvas.width / wall;
+    let x = gapStart * scale;
 
-    // 作品幅表示
-    ctx.fillStyle = "black";
-    ctx.fillText(`${w}`, x, 45);
-
-    // 左側余白表示
+    artworks.forEach((w, i) => {
+      const width = w * scale;
+      ctx.fillStyle = "#333";
+      ctx.fillRect(x, 50, width, 30);
+      ctx.fillStyle = "white";
+      ctx.font = "10px sans-serif";
+      ctx.fillText(String.fromCharCode(65 + i), x + 4, 70);
+      ctx.fillStyle = "black";
+      ctx.fillText(`${w}`, x, 45);
+      ctx.fillStyle = "blue";
+      const dGap = (i === 0) ? gapStart : gapMid;
+      ctx.fillText(`${dGap.toFixed(0)}`, x - (dGap * scale) / 2 - 5, 105);
+      x += width + (gapMid * scale);
+    });
     ctx.fillStyle = "blue";
-    ctx.fillText(`${gap.toFixed(0)}`, x - (gap * scale) / 2, 90);
+    ctx.fillText(`${gapStart.toFixed(0)}`, canvas.width - (gapStart * scale) / 2 - 5, 105);
+  }
 
-    x += width + gap * scale;
-  });
-
-  // 最後の余白
-  ctx.fillStyle = "blue";
-  ctx.fillText(`${gap.toFixed(0)}`, canvas.width - (gap * scale) / 2, 90);
-}
+  // 初期実行
+  calcMode.addEventListener("change", updateUI);
+  document.getElementById("wallWidth").addEventListener("input", calculate);
+  document.getElementById("edgeWidth").addEventListener("input", calculate);
+  document.getElementById("midGapWidth").addEventListener("input", calculate);
+  
+  addArtwork();
+  addArtwork();
+});
