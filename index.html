@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>均等割りくん Ver2</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
 </head>
 <body>
   <div class="container">
@@ -16,6 +17,8 @@
         <option value="even">すべて均等</option>
         <option value="fixEdge">両端を指定 → 中を自動</option>
         <option value="fixGap">中の隙間を指定 → 両端を自動</option>
+        <option value="fixLeft">左端のみ指定 → 残りを均等</option>
+        <option value="fixRight">右端のみ指定 → 残りを均等</option>
       </select>
     </div>
 
@@ -26,7 +29,7 @@
 
     <div id="extraSettings" class="card" style="display:none;">
       <div id="edgeInputGroup" style="display:none;">
-        <label>両端の余白 (mm)</label>
+        <label id="edgeLabel">余白 (mm)</label>
         <input id="edgeWidth" type="number" placeholder="例：500" inputmode="decimal">
       </div>
       <div id="gapInputGroup" style="display:none;">
@@ -48,7 +51,17 @@
       <div id="gap" class="gap"></div>
     </div>
 
-    <canvas id="canvas" width="350" height="120"></canvas>
+    <canvas id="canvas" width="350" height="130"></canvas>
+
+    <div class="card slide-card">
+      <label>◀全体スライド調整 (mm)▶</label>
+      <div class="slide-control">
+        <input id="slideOffset" type="range" value="0" min="-100" max="100" step="1">
+        <input id="slideOffsetText" type="number" value="0" inputmode="numbers" class="slide-val-input">
+      </div>
+      <small>※プラス数値で右へ、マイナスで左へ移動</small>
+    </div>
+
   </div>
   <script src="app.js"></script>
 </body>

@@ -71,3 +71,84 @@ select {
   background-color: #f0f7ff;
   border: 1px solid #cfe2f3;
 }
+.result span {
+  display: block;
+  margin-top: 4px;
+}
+
+.slide-card {
+  border-left: 4px solid #ffa500; /* オレンジ色のアクセント */
+  background-color: #fffaf0;
+}
+
+.slide-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.slide-control input {
+  flex: 1;
+  text-align: center;
+  font-weight: bold;
+  color: #d2691e;
+}
+
+.slide-control span {
+  font-size: 14px;
+  color: #666;
+  white-space: nowrap;
+}
+
+small {
+  display: block;
+  color: #888;
+  font-size: 11px;
+  margin-top: 4px;
+}
+
+canvas {
+  /* スマホでのスクロール誤動作を防ぐ */
+  touch-action: none; 
+}
+
+.slide-card {
+  border-top: 4px solid #ffa500; /* オレンジ色のアクセントを上に */
+  background-color: #fffaf0;
+  margin-top: 4px; /* キャンバスとの距離を詰める */
+  padding: 8px; /* 少しコンパクトに */
+}
+
+.slide-card label {
+  font-size: 14px;
+  color: #d2691e;
+  font-weight: bold;
+}
+
+.slide-control {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+/* スライダー（range）のスタイル調整 */
+.slide-control input[type="range"] {
+  flex: 1;
+  height: 20px; /* タップしやすく */
+  margin: 0;
+}
+
+/* 数値入力欄のスタイル調整 */
+.slide-val-input {
+  width: 65px;
+  font-size: 16px;
+  text-align: center;
+  font-weight: bold;
+  color: #d2691e;
+  border: 1px solid #d2691e;
+  border-radius: 4px;
+  padding: 4px;
+  margin: 0;
+}
