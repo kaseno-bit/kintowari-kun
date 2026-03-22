@@ -46,6 +46,12 @@
       <div id="artworks"></div>
     </div>
 
+    <div class="card group-setting">
+      <label>グループ内の隙間 (mm)</label>
+      <input id="groupGapWidth" type="number" value="50" inputmode="decimal">
+      <small>※「連」にチェックした作品同士の隙間です</small>
+    </div>
+
     <div class="result">
       <div id="error" class="error"></div>
       <div id="gap" class="gap"></div>
@@ -59,7 +65,11 @@
         <input id="slideOffset" type="range" value="0" min="-100" max="100" step="1">
         <input id="slideOffsetText" type="number" value="0" inputmode="numbers" class="slide-val-input">
       </div>
-      <small>※プラス数値で右へ、マイナスで左へ移動</small>
+    </div>
+
+    <div class="card">
+      <label>個別隙間の固定・修正</label>
+      <div id="individualGaps"></div>
     </div>
 
   </div>
