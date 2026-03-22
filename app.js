@@ -1,15 +1,29 @@
 const artworksDiv = document.getElementById("artworks");
 
 function addArtwork(value = "") {
+  const wrapper = document.createElement("div");
+  wrapper.style.display = "flex";
+  wrapper.style.gap = "6px";
+
   const input = document.createElement("input");
   input.type = "number";
   input.placeholder = "作品幅";
   input.value = value;
   input.oninput = calculate;
-  artworksDiv.appendChild(input);
+
+  const del = document.createElement("button");
+  del.innerText = "×";
+  del.onclick = () => {
+    wrapper.remove();
+    calculate();
+  };
+
+  wrapper.appendChild(input);
+  wrapper.appendChild(del);
+  artworksDiv.appendChild(wrapper);
 }
 
-// 初期2つ
+// 初期
 addArtwork();
 addArtwork();
 
@@ -61,12 +75,26 @@ function draw(wall, artworks, gap) {
   artworks.forEach((w, i) => {
     const width = w * scale;
 
+    // 作品
     ctx.fillStyle = "#333";
-    ctx.fillRect(x, 40, width, 40);
+    ctx.fillRect(x, 50, width, 30);
 
+    // 作品ラベル
     ctx.fillStyle = "white";
-    ctx.fillText(String.fromCharCode(65 + i), x + 5, 65);
+    ctx.fillText(String.fromCharCode(65 + i), x + 4, 70);
+
+    // 作品幅表示
+    ctx.fillStyle = "black";
+    ctx.fillText(`${w}`, x, 45);
+
+    // 左側余白表示
+    ctx.fillStyle = "blue";
+    ctx.fillText(`${gap.toFixed(0)}`, x - (gap * scale) / 2, 90);
 
     x += width + gap * scale;
   });
+
+  // 最後の余白
+  ctx.fillStyle = "blue";
+  ctx.fillText(`${gap.toFixed(0)}`, canvas.width - (gap * scale) / 2, 90);
 }
