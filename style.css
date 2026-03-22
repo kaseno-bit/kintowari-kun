@@ -235,3 +235,20 @@ canvas {
 .result {
   margin: 10px 0 5px 0;
 }
+
+.group-setting {
+  border-left: 4px solid #007bff;
+  background-color: #f0f7ff;
+  margin-top: 4px; /* キャンバスとの距離を詰める */
+  padding: 8px;
+}
+
+.group-setting label {
+  color: #007bff;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.slide-card {
+  margin-top: 4px; /* グループ設定との距離を詰める */
+}
