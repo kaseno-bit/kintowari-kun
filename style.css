@@ -252,3 +252,67 @@ canvas {
 .slide-card {
   margin-top: 4px; /* グループ設定との距離を詰める */
 }
+
+
+/* アプリ切替ナビ */
+.app-nav {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 15px;
+  overflow-x: auto;
+  padding-bottom: 5px;
+}
+.app-nav button {
+  flex: 1;
+  white-space: nowrap;
+  background: #eee;
+  border: 1px solid #ccc;
+  color: #333;
+}
+.app-nav button.active {
+  background: #333;
+  color: #fff;
+}
+.app-nav button.external {
+  background: #e0e0ff;
+  border-color: #bbbbff;
+}
+
+/* ビス位置くん結果表示 */
+.bis-sub-result {
+  margin-top: 10px;
+  padding: 8px;
+  background: #f8f9fa;
+  border-radius: 5px;
+}
+.bis-sub-result p {
+  margin: 4px 0;
+  font-size: 14px;
+}
+.bis-sub-result strong {
+  font-size: 18px;
+  color: #d9534f;
+}
+.bis-sub-result.highlight {
+  border: 2px solid #007bff;
+  background: #ebf5ff;
+}
+
+/* ナビゲーションの準備中スタイル */
+.coming-soon {
+  opacity: 0.5;
+  cursor: not-allowed !important;
+  background-color: #ddd !important;
+  border-color: #ccc !important;
+  color: #888 !important;
+}
+
+.coming-soon:active {
+  transform: none; /* 押し込み効果も消す */
+}
+
+/* 既存のキャンバス・カード等の微調整 */
+#canvas-bis {
+  margin-top: 10px;
+  background: #fff;
+}
