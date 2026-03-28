@@ -38,6 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const wrapper = document.createElement("div");
     wrapper.className = "art-input-row";
     
+    // 1. 作品幅入力
     const input = document.createElement("input");
     input.type = "number";
     input.placeholder = "幅";
@@ -46,6 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
     input.className = "art-width-input";
     input.oninput = calculateKinto;
 
+    // 2. 「連」チェックボックス
     const groupLabel = document.createElement("label");
     groupLabel.className = "group-check-label";
     const groupCheck = document.createElement("input");
@@ -53,14 +55,15 @@ document.addEventListener("DOMContentLoaded", () => {
     groupCheck.className = "group-check";
     groupCheck.onchange = calculateKinto;
     
-    // アイコン的な見た目にするための調整
-    groupLabel.appendChild(groupCheck);
     const span = document.createElement("span");
     span.innerText = "連";
+    groupLabel.appendChild(groupCheck);
     groupLabel.appendChild(span);
 
+    // 3. 削除ボタン
     const del = document.createElement("button");
-    del.innerHTML = '<span class="material-icons-round" style="font-size:18px">delete</span>';
+    del.className = "btn-delete";
+    del.innerHTML = '<span class="material-icons-round" style="font-size:20px">delete</span>';
     del.type = "button";
     del.onclick = () => { wrapper.remove(); lockedGaps = {}; calculateKinto(); };
 
@@ -226,8 +229,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const totalMaxH = Math.max(center + h/2 + 100, 2000);
     const scale = Math.min((canvas.height - padTop - padBottom) / totalMaxH, (canvas.width - padSide * 2) / w, 0.4);
 
-    const cx = canvas.width / 2, groundY = canvas.height - padBottom;
-    const centerY = groundY - (center * scale), ty = centerY - (h / 2 * scale), by = centerY + (h / 2 * scale), rw = w * scale, rh = h * scale;
+    const cx = canvas.width / 2;
+    const groundY = canvas.height - padBottom;
+    const centerY = groundY - (center * scale);
+    const ty = centerY - (h / 2 * scale);
+    const by = centerY + (h / 2 * scale);
+    const rw = w * scale, rh = h * scale;
 
     ctx.strokeStyle = "#cbd5e1"; ctx.beginPath(); ctx.moveTo(10, groundY); ctx.lineTo(canvas.width - 10, groundY); ctx.stroke();
     ctx.fillStyle = "#94a3b8"; ctx.fillText("床", 5, groundY + 12);
@@ -270,6 +277,5 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById(id).addEventListener("input", () => { if(id === "centerLine") calcBis(); else calculateKinto(); });
   });
   
-  // 初回作品追加
   addArtwork(); addArtwork();
 });

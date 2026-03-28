@@ -28,7 +28,7 @@ h1, h2 {
   justify-content: center;
   gap: 8px;
   font-size: 1.25rem;
-  margin-bottom: 1.5rem;
+  margin: 0 0 1.5rem 0;
 }
 
 /* ナビゲーション */
@@ -53,7 +53,7 @@ h1, h2 {
   background: transparent;
   color: var(--text-sub);
   border: none;
-  transition: all 0.2s;
+  cursor: pointer;
 }
 
 .app-nav button .material-icons-round { font-size: 20px; }
@@ -88,20 +88,83 @@ h1, h2 {
 input, select {
   width: 100%;
   font-size: 1.1rem;
-  padding: 12px;
+  padding: 10px;
   border-radius: 10px;
   border: 1px solid var(--border-color);
   background: #f1f5f9;
-  transition: border-color 0.2s;
+  box-sizing: border-box;
 }
 
-input:focus {
-  outline: none;
-  border-color: var(--primary-color);
-  background: #fff;
+/* 作品入力行の1行レイアウト修正 */
+.art-input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* 要素間の隙間 */
+  margin-bottom: 10px;
 }
 
-/* ビス位置くんのグリッド表示 */
+.art-width-input {
+  flex: 1; /* 入力欄を最大に広げる */
+  min-width: 0; /* 折り返し防止 */
+}
+
+.group-check-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  min-width: 32px;
+  cursor: pointer;
+}
+
+.group-check-label span {
+  font-size: 10px;
+  font-weight: bold;
+  color: var(--primary-color);
+  line-height: 1;
+}
+
+.group-check {
+  width: 22px !important;
+  height: 22px !important;
+  margin: 0 !important;
+  cursor: pointer;
+}
+
+.btn-delete {
+  background: #fee2e2;
+  color: #ef4444;
+  border: none;
+  padding: 8px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-delete:hover {
+  background: #fecaca;
+}
+
+/* ＋追加ボタン */
+.btn-add {
+  background: var(--primary-color);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+/* ビス位置くんグリッド */
 .bis-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -121,7 +184,6 @@ input:focus {
 .highlight .bis-item { background: #eff6ff; border: 1px solid #bfdbfe; }
 .highlight strong { color: var(--primary-color); }
 
-/* キャンバスのラッパー */
 .canvas-wrapper {
   background: #fff;
   border-radius: 16px;
@@ -133,21 +195,13 @@ input:focus {
 
 canvas { width: 100%; height: auto; display: block; }
 
-/* ボタン */
-.btn-add {
-  background: var(--primary-color);
-  color: #fff;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 6px 12px;
-  font-size: 0.8rem;
-}
+.slide-card { border-top: 4px solid #ffa500; background-color: #fffaf0;}
+.slide-control { display: flex; align-items: center; gap: 12px; margin-top: 6px; }
+.slide-control input[type="range"] { flex: 1; }
+.slide-val-input { width: 70px !important; text-align: center; font-weight: bold; color: #d2691e; }
 
-.art-input-row button {
-  background: #fee2e2;
-  color: #ef4444;
-  font-weight: bold;
-}
+#individualGaps { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+.gap-row { display: flex; align-items: center; justify-content: space-between; background: #f9f9f9; padding: 6px; border-radius: 8px; border: 1px solid #eee; }
+.gap-row input { width: 65px !important; font-size: 0.9rem; padding: 4px; text-align: right; }
 
 .coming-soon { opacity: 0.4; }
