@@ -7,7 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   
-  <link rel="stylesheet" href="style.css?v=1.0.3">
+  <link rel="stylesheet" href="style.css?v=1.0.1">
   
   <link rel="manifest" href="manifest.json">
 </head>
@@ -27,15 +27,6 @@
         <span class="material-icons-round">layers</span>大作くん
       </button>
     </nav>
-
-    <div class="card save-area">
-      <div class="save-controls">
-        <input id="saveName" type="text" placeholder="場所名や作品名を入力">
-        <button type="button" class="btn-save" onclick="saveCurrentData()">
-          <span class="material-icons-round">save</span>保存
-        </button>
-      </div>
-    </div>
 
     <div id="app-kinto">
       <h2 class="section-title"><span class="material-icons-round">straighten</span> 均等割りくん</h2>
@@ -137,14 +128,8 @@
         <canvas id="canvas-bis" width="350" height="400"></canvas>
       </div>
     </div>
-
-    <div id="historySection" class="card history-card">
-      <label><span class="material-icons-round">history</span> 保存済み履歴（15件）</label>
-      <div id="historyList"></div>
-    </div>
-
   </div>
-  
-  <script src="app.js?v=1.0.3"></script>
+
+  <script src="app.js?v=1.0.1"></script>
 </body>
 </html>

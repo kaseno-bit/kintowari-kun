@@ -1,7 +1,7 @@
 :root {
   --primary-color: #2563eb;
   --accent-red: #dc2626;
-  --bg-color: #f1f5f9;
+  --bg-color: #f8fafc;
   --card-bg: #ffffff;
   --text-main: #1e293b;
   --text-sub: #64748b;
@@ -16,59 +16,192 @@ body {
   line-height: 1.5;
 }
 
-.container { padding: 16px; max-width: 500px; margin: 0 auto; }
+.container {
+  padding: 16px;
+  max-width: 500px;
+  margin: 0 auto;
+}
 
-h1, h2 { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 1.25rem; margin: 0 0 1rem 0; }
+h1, h2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 1.25rem;
+  margin: 0 0 1.5rem 0;
+}
 
-.app-nav { display: flex; gap: 8px; margin-bottom: 16px; background: #fff; padding: 6px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-.app-nav button { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 4px; font-size: 0.7rem; background: transparent; color: var(--text-sub); border: none; cursor: pointer; }
+/* ナビゲーション */
+.app-nav {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  background: #fff;
+  padding: 6px;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.app-nav button {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 4px;
+  font-size: 0.7rem;
+  background: transparent;
+  color: var(--text-sub);
+  border: none;
+  cursor: pointer;
+}
+
 .app-nav button .material-icons-round { font-size: 20px; }
-.app-nav button.active { background: var(--primary-color); color: #fff; border-radius: 8px; font-weight: bold; }
 
-.card { background: var(--card-bg); padding: 16px; margin-bottom: 12px; border-radius: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); border: 1px solid var(--border-color); }
-.card label { display: flex; align-items: center; gap: 6px; font-size: 0.85rem; font-weight: 700; color: var(--text-sub); margin-bottom: 8px; }
+.app-nav button.active {
+  background: var(--primary-color);
+  color: #fff;
+  border-radius: 8px;
+  font-weight: bold;
+}
 
-input, select { width: 100%; font-size: 1.1rem; padding: 10px; border-radius: 10px; border: 1px solid var(--border-color); background: #f8fafc; box-sizing: border-box; }
+/* カードデザイン */
+.card {
+  background: var(--card-bg);
+  padding: 16px;
+  margin-bottom: 12px;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border-color);
+}
 
-/* 1行レイアウト */
-.art-input-row { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; }
-.art-width-input { flex: 1; }
-.group-check-label { display: flex; flex-direction: column; align-items: center; min-width: 30px; cursor: pointer; }
-.group-check-label span { font-size: 9px; font-weight: bold; color: var(--primary-color); }
-.group-check { width: 20px !important; height: 20px !important; margin: 0 !important; }
-.btn-delete { background: #fee2e2; color: #ef4444; border: none; padding: 8px; border-radius: 8px; cursor: pointer; display: flex; }
+.card label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-sub);
+  margin-bottom: 8px;
+}
 
-/* 保存エリア */
-.save-controls { display: flex; gap: 8px; }
-.save-controls input { flex: 1; font-size: 0.9rem; background: #fff; border: 2px solid #e2e8f0; }
-.btn-save { background: #059669; color: white; border: none; padding: 0 15px; border-radius: 10px; font-weight: bold; display: flex; align-items: center; gap: 4px; cursor: pointer; }
+input, select {
+  width: 100%;
+  font-size: 1.1rem;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  background: #f1f5f9;
+  box-sizing: border-box;
+}
 
-/* 履歴リスト */
-.history-card { background: #f8fafc; border: 1px dashed #cbd5e1; }
-.history-item { display: flex; justify-content: space-between; align-items: center; background: #fff; padding: 10px; border-radius: 8px; margin-top: 8px; border: 1px solid #e2e8f0; font-size: 0.9rem; }
-.history-info { display: flex; flex-direction: column; cursor: pointer; flex: 1; }
-.history-name { font-weight: bold; color: var(--primary-color); }
-.history-meta { font-size: 0.75rem; color: var(--text-sub); }
-.btn-history-del { color: #cbd5e1; background: transparent; border: none; cursor: pointer; padding: 4px; }
-.btn-history-del:hover { color: #ef4444; }
+/* 作品入力行の1行レイアウト修正 */
+.art-input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* 要素間の隙間 */
+  margin-bottom: 10px;
+}
 
-.btn-add { background: var(--primary-color); color: #fff; display: flex; align-items: center; gap: 4px; padding: 6px 12px; font-size: 0.8rem; border-radius: 8px; border: none; cursor: pointer; }
-.bis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
-.bis-item { background: #f8fafc; padding: 8px; border-radius: 8px; text-align: center; }
-.bis-item span { font-size: 0.65rem; color: var(--text-sub); display: block; }
-.bis-item strong { font-size: 1.1rem; color: var(--accent-red); }
+.art-width-input {
+  flex: 1; /* 入力欄を最大に広げる */
+  min-width: 0; /* 折り返し防止 */
+}
+
+.group-check-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  min-width: 32px;
+  cursor: pointer;
+}
+
+.group-check-label span {
+  font-size: 10px;
+  font-weight: bold;
+  color: var(--primary-color);
+  line-height: 1;
+}
+
+.group-check {
+  width: 22px !important;
+  height: 22px !important;
+  margin: 0 !important;
+  cursor: pointer;
+}
+
+.btn-delete {
+  background: #fee2e2;
+  color: #ef4444;
+  border: none;
+  padding: 8px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-delete:hover {
+  background: #fecaca;
+}
+
+/* ＋追加ボタン */
+.btn-add {
+  background: var(--primary-color);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+/* ビス位置くんグリッド */
+.bis-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.bis-item {
+  background: #f8fafc;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.bis-item span { font-size: 0.7rem; color: var(--text-sub); display: block; }
+.bis-item strong { font-size: 1.2rem; color: var(--accent-red); }
 .highlight .bis-item { background: #eff6ff; border: 1px solid #bfdbfe; }
 .highlight strong { color: var(--primary-color); }
 
-.canvas-wrapper { background: #fff; border-radius: 16px; padding: 10px; margin-bottom: 12px; border: 1px solid var(--border-color); }
+.canvas-wrapper {
+  background: #fff;
+  border-radius: 16px;
+  padding: 10px;
+  margin-bottom: 12px;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
 canvas { width: 100%; height: auto; display: block; }
 
-.slide-card { border-top: 4px solid #f59e0b; background-color: #fffbeb; }
-.slide-control { display: flex; align-items: center; gap: 10px; }
-.slide-val-input { width: 60px !important; text-align: center; font-size: 0.9rem !important; color: #b45309; }
+.slide-card { border-top: 4px solid #ffa500; background-color: #fffaf0;}
+.slide-control { display: flex; align-items: center; gap: 12px; margin-top: 6px; }
+.slide-control input[type="range"] { flex: 1; }
+.slide-val-input { width: 70px !important; text-align: center; font-weight: bold; color: #d2691e; }
 
-#individualGaps { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-.gap-row { display: flex; align-items: center; justify-content: space-between; background: #fff; padding: 5px 8px; border-radius: 8px; border: 1px solid #e2e8f0; font-size: 0.8rem; }
-.gap-row input { width: 55px !important; font-size: 0.85rem; padding: 3px; text-align: right; background: #f1f5f9; }
+#individualGaps { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+.gap-row { display: flex; align-items: center; justify-content: space-between; background: #f9f9f9; padding: 6px; border-radius: 8px; border: 1px solid #eee; }
+.gap-row input { width: 65px !important; font-size: 0.9rem; padding: 4px; text-align: right; }
 
 .coming-soon { opacity: 0.4; }
